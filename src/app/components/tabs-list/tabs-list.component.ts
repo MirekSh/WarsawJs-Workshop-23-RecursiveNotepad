@@ -1,9 +1,7 @@
 import { ServerException } from './../../errors/errors';
 import { TabsService } from './../../services/tabs.service';
 import { Tab } from './../../models/tab.model';
-import { Observable } from 'rxjs';
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { EmptyGuid } from './../../common/guid.extension';
 import { ExceptionCode } from "../../errors/ExceptionCode";
@@ -56,10 +54,10 @@ import { ExceptionCode } from "../../errors/ExceptionCode";
         </tabs-list> 
 
         <context-menu #tabContextMenu>
-            <template contextMenuItem let-item (execute)="TabContextMenu_DeleteTab($event)">Delete</template>
-            <template contextMenuItem divider="true"></template>
-            <template contextMenuItem let-item [enabled]="!HaveMovingTab()" (execute)="TabContextMenu_CutTab($event)">Cut</template>        
-            <template contextMenuItem let-item [enabled]="HaveMovingTab()" (execute)="TabContextMenu_BindTabToParent($event)">Paste <b>{{CuttedTabName()}}</b> as sibiling</template>
+            <ng-template contextMenuItem let-item (execute)="TabContextMenu_DeleteTab($event)">Delete</ng-template>
+            <ng-template contextMenuItem divider="true"></ng-template>
+            <ng-template contextMenuItem let-item [enabled]="!HaveMovingTab()" (execute)="TabContextMenu_CutTab($event)">Cut</ng-template>        
+            <ng-template contextMenuItem let-item [enabled]="HaveMovingTab()" (execute)="TabContextMenu_BindTabToParent($event)">Paste <b>{{CuttedTabName()}}</b> as sibiling</ng-template>
         </context-menu>
         
     `,

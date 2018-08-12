@@ -4,11 +4,11 @@ import { EditableValueComponent } from './components/editable-value/editable-val
 import { EditableOnceComponent } from './components/editable-once/editable-once.component';
 import { DynamicTabsComponent } from './components/tabs/tabs.component';
 import { FocusModule } from 'angular2-focus';
-import { Http, HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { ContextMenuModule } from 'angular2-contextmenu';
+import { ContextMenuModule } from 'ngx-contextmenu';
 
 @NgModule({
   imports: 
@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     HttpModule,
     CommonModule,
     FocusModule.forRoot(),
-    // ContextMenuModule
+    ContextMenuModule.forRoot()
   ],
   exports:
   [

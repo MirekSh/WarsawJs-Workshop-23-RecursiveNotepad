@@ -1,7 +1,6 @@
 import { AuthService } from './services/AuthService';
 import { CqrsBus } from './services/cqrs/CqrsBus';
 import { SnackService } from './services/ErrorService';
-// import { MdSnackBar, MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from './tabs.module';
 import { AuthComponent } from './components/auth/auth.component';
@@ -25,8 +24,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    TabsModule,
-    // MaterialModule
+    TabsModule
   ],
   providers:
   [

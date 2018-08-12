@@ -4,7 +4,7 @@ import { TabsService } from './../../services/tabs.service';
 import { EmptyGuid } from './../../common/guid.extension';
 import { Tab } from './../../models/tab.model';
 import { SuperFixture } from './../../testing/utils';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { element, by } from 'protractor';
 import { TabsListComponent } from './tabs-list.component';
@@ -13,7 +13,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { guid } from "app/common/types";
+import { guid } from "../../common/types";
 
 describe('tabs-list', () =>
 {
