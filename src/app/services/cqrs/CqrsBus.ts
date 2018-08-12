@@ -2,7 +2,7 @@ import { ConnectionTimeoutException } from './../../exceptions/ConnectionTimeout
 import { UnhandledException } from './../../exceptions/UnhandledException';
 import { IQuery } from './IQuery';
 import { ICommand } from './ICommand';
-import { SnackService } from './../ErrorService';
+import { ErrorService } from './../ErrorService';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './../storage.service';
@@ -17,7 +17,7 @@ export class CqrsBus
     constructor(
         private _http: Http,
         private _storage: StorageService,
-        private _snackService: SnackService)
+        private _snackService: ErrorService)
     {
         if (window.location.hostname.includes('localhost')) // TODO: This is primitive but works :P
         {
