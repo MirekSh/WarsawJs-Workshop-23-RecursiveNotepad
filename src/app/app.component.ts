@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   template: `
  
     <div class="header">      
-       <span class="title">Recursive Notepad</span> 
+       <span class="title" id="app-title">Recursive Notepad</span> 
        <auth></auth>        
     </div>
          
