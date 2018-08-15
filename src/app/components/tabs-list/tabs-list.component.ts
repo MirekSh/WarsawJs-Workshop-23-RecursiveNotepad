@@ -15,7 +15,7 @@ import { ExceptionCode } from "../../errors/ExceptionCode";
             <li *ngIf="parentTab != null" 
                 [class.active]="selectedTab == null" 
                 (click)="SelectContentTab()">
-                <a>_</a>
+                <a class="content-tab">_</a>
             </li>
 
             <li *ngIf="isLoading"> 
@@ -40,6 +40,7 @@ import { ExceptionCode } from "../../errors/ExceptionCode";
             <li>   
                 <a>             
                     <editable-once [value]="'(+)'"
+                                    class="add-tab"
                                    [placeholder]="'New Tab Title'"
                                    (onComplete)="AddSibiling($event)">
                     </editable-once>             
@@ -54,7 +55,7 @@ import { ExceptionCode } from "../../errors/ExceptionCode";
         </tabs-list> 
 
         <context-menu #tabContextMenu>
-            <ng-template contextMenuItem let-item (execute)="TabContextMenu_DeleteTab($event)">Delete</ng-template>
+            <ng-template contextMenuItem let-item (execute)="TabContextMenu_DeleteTab($event)"><span id="tab-contextmenu-delete">Delete</span></ng-template>
             <ng-template contextMenuItem divider="true"></ng-template>
             <ng-template contextMenuItem let-item [enabled]="!HaveMovingTab()" (execute)="TabContextMenu_CutTab($event)">Cut</ng-template>        
             <ng-template contextMenuItem let-item [enabled]="HaveMovingTab()" (execute)="TabContextMenu_BindTabToParent($event)">Paste <b>{{CuttedTabName()}}</b> as sibiling</ng-template>

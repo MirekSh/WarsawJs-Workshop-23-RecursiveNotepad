@@ -13,6 +13,7 @@ import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core
 
     <span *ngIf="edit" class="value-edit">
         <input type="text"
+               class="editable-once-input"
                #thisInput 
                focus="true"
                [value]="value"                           

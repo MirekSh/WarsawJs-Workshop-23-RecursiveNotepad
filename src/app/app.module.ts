@@ -16,7 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations:
   [
     AppComponent,
-    AuthComponent,
+    AuthComponent
   ],
   imports:
   [
@@ -38,9 +38,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     [
       AppComponent
     ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents:
-    [
-    ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

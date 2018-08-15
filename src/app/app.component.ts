@@ -14,8 +14,6 @@ import { Component } from '@angular/core';
     <button *ngIf="!showTabs" (click)="Demo()" class="margin-top btn btn-danger center-block">See Example</button>
     <tabs *ngIf="showTabs"></tabs>
 
-    <simple-clock theme="gray" (clicked)="OnClockClick($event)"></simple-clock>
-
     `,
   styleUrls: ['app.component.css']
 })
@@ -23,17 +21,11 @@ export class AppComponent
 {
   showTabs: boolean = false;
 
-  constructor(private _auth: AuthService//, public _snackBar: MatSnackBar
-  )
+  constructor(private _auth: AuthService)
   {
     this.showTabs = _auth.IsLoggedIn();
 
     _auth.LoginStatusChanged.subscribe((loginStatus: boolean) => this.showTabs = loginStatus);
-  }
-
-  openSnackBar()
-  {
-  //  this._snackBar.open("yo!", null, { duration: 1000 });
   }
 
   Demo()

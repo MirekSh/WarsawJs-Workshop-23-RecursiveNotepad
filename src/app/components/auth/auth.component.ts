@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 enum AuthFormViewState
 {
-  Initial, Logging, LogedIn, UserNotFound, WrongPassword,
+  Initial, Logging, LoggedIn, UserNotFound, WrongPassword,
   Registering, EmailTaken
 }
 
@@ -15,6 +15,7 @@ enum AuthFormViewState
     
       <div class="form-group">
         <input type="text" #email                  
+              id="auth-login-input"
               [ngClass]="{ 'alert-danger': emailInputError, 'hide': !inputsVisible }"
               placeholder="E-mail"
               class="form-control"
@@ -23,7 +24,8 @@ enum AuthFormViewState
       </div>
    
       <div class="form-group" >   
-        <input type="password" #pass                
+        <input type="password" #pass    
+              id="auth-password-input"            
               [ngClass]="{ 'alert-danger': passwordInputError, 'hide': !inputsVisible }"
               placeholder="Password" 
               class="form-control"
@@ -33,15 +35,18 @@ enum AuthFormViewState
     
       <div class="form-group">
         <button *ngIf="loginButtonVisible"
+                id="auth-login-button"
                 (click)="Login(email.value, pass.value)"
                 class="btn btn-primary">{{ loginButtonText }}</button>
         <button *ngIf="logoutButtonVisible" 
+                id="auth-logout-button"
                 (click)="Logout()"
                 class="btn">Logout</button> 
       </div> 
       
       <div class="form-group">
         <button *ngIf="loginButtonVisible"
+                id="auth-register-button"
                 (click)="Register(email.value, pass.value)"
                 class="btn btn-default">{{ registerButtonText }}</button>    
       </div>
@@ -66,13 +71,13 @@ export class AuthComponent
 
   constructor(private _auth: AuthService)
   {
-    if (_auth.IsLoggedIn())  this.SetFormState(AuthFormViewState.LogedIn);
+    if (_auth.IsLoggedIn())  this.SetFormState(AuthFormViewState.LoggedIn);
 
     _auth.LoginStatusChanged.subscribe((loginStatus: boolean) => 
     {
       if (loginStatus == true)
       {
-        this.SetFormState(AuthFormViewState.LogedIn);
+        this.SetFormState(AuthFormViewState.LoggedIn);
       }
     });
 
@@ -98,7 +103,7 @@ export class AuthComponent
       case AuthFormViewState.Logging:
         this.loginButtonText = "Logging...";
         break;
-      case AuthFormViewState.LogedIn:
+      case AuthFormViewState.LoggedIn:
         this.inputsVisible = false;
         this.loginButtonVisible = false;
         this.logoutButtonVisible = true;
@@ -127,7 +132,7 @@ export class AuthComponent
 
     switch (status)
     {
-      case LoginStatus.LoggedIn: this.SetFormState(AuthFormViewState.LogedIn);
+      case LoginStatus.LoggedIn: this.SetFormState(AuthFormViewState.LoggedIn);
         break;
       case LoginStatus.UserNotFound: this.SetFormState(AuthFormViewState.UserNotFound);
         break;
@@ -146,7 +151,7 @@ export class AuthComponent
 
     switch (status)
     {
-      case RegisterStatus.Registered: this.SetFormState(AuthFormViewState.LogedIn);
+      case RegisterStatus.Registered: this.SetFormState(AuthFormViewState.LoggedIn);
         break;
       case RegisterStatus.EmailTaken: this.SetFormState(AuthFormViewState.EmailTaken);
         break;
