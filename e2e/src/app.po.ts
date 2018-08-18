@@ -1,4 +1,4 @@
-import { protractor, browser, by, element, $, $$, ElementFinder } from 'protractor';
+import { protractor, browser, by, element, $, $$, ElementFinder, until } from 'protractor';
 
 export class AppPage
 {
@@ -9,11 +9,11 @@ export class AppPage
 
   public async SetLogin(email: string): Promise<void>
   {
-    return browser.$('#auth-login-input').sendKeys(email);
+    await browser.$('#auth-login-input').sendKeys(email);
   }
   public async SetPassword(password: string): Promise<void>
   {
-    return browser.$('#auth-password-input').sendKeys(password);
+    await browser.$('#auth-password-input').sendKeys(password);
   }
 
   public async ClickLogin(): Promise<void>
@@ -53,7 +53,6 @@ export class AppPage
     return element(by.cssContainingText('.editable-tab', label));
   }
 
-
   public async Sleep(ms): Promise<void>
   {
     return browser.sleep(ms);
@@ -61,12 +60,12 @@ export class AppPage
 
   public async GetContentTabText(): Promise<string>
   {
-    return element(by.className('content-tab')).getText();
+    return $('.content-tab').getText();
   }
 
-  public async GetLogin(): Promise<string>
+  public async GetLoginValue(): Promise<string>
   {
-    return element(by.id('auth-login-input')).getAttribute('value');
+    return $('#auth-login-input').getAttribute('value');
   }
 
   public async GetSnackBarText(): Promise<string>
@@ -74,7 +73,7 @@ export class AppPage
     return $('.cdk-live-announcer-element').getText();
   }
 
-  public async Login(email: string, password: string): Promise<void>
+  public async Login(email: string, password: string): Promise<void> // move to test helpers
   {
     await this.SetLogin(email);
     await this.SetPassword(password);
@@ -122,9 +121,16 @@ export class AppPage
     await this.ClickDeleteInContextMenu();
     await this.CloseAlert();
   }
-  public async OpenContextMenuForTab(): Promise<void>
+
+  public async WaitForTabsLoad(): Promise<void> // there is more then one sometimes (if first is not empty)
   {
-      
+    await browser.wait(until.elementLocated(by.css('.value-label')), 4000);
+  }
+
+  public async TabsCount(): Promise<number> // there is more then one sometimes (if first is not empty)
+  {
+    const tabs = await $$('.value-label');
+    return tabs.length;
   }
 
   public async GetFirstActiveTab(): Promise<ElementFinder>

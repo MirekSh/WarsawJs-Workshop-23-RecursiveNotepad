@@ -1,1 +1,0 @@
-export const FIRST_ROW_TABS_TITLES = ['First tab', 'Second tab'];

@@ -23,28 +23,28 @@ describe('tabs-list', () =>
         {
             GetChildren: (parentId: guid) =>
             {
-                if (parentId === EmptyGuid)
-                {
-                    return Observable.of(
-                        [
-                            { parentId: EmptyGuid, id: "00000000-0000-0000-0000-000000000001", title: 'A', content: 'A content' },
-                            { parentId: EmptyGuid, id: "00000000-0000-0000-0000-000000000002", title: 'B', content: 'B content' },
-                            { parentId: EmptyGuid, id: "00000000-0000-0000-0000-000000000003", title: 'C', content: 'C content' }
-                        ]);
-                }
-                else if (parentId === "00000000-0000-0000-0000-000000000001")
-                {
-                    return Observable.of(
-                        [
-                            { parentId: "00000000-0000-0000-0000-000000000001", id: "00000000-0000-0000-0000-000000000010", title: 'AA', content: 'AA content' },
-                            { parentId: "00000000-0000-0000-0000-000000000001", id: "00000000-0000-0000-0000-000000000011", title: 'AB', content: 'AB content' },
-                            { parentId: "00000000-0000-0000-0000-000000000001", id: "00000000-0000-0000-0000-000000000012", title: 'AC', content: 'AC content' }
-                        ]);
-                }
-                else if (parentId === "00000000-0000-0000-0000-000000000002")
-                {
-                    return Observable.of([]);
-                }
+                // if (parentId === EmptyGuid)
+                // {
+                //     return Observable.of(
+                //         [
+                //             { parentId: EmptyGuid, id: "00000000-0000-0000-0000-000000000001", title: 'A', content: 'A content' },
+                //             { parentId: EmptyGuid, id: "00000000-0000-0000-0000-000000000002", title: 'B', content: 'B content' },
+                //             { parentId: EmptyGuid, id: "00000000-0000-0000-0000-000000000003", title: 'C', content: 'C content' }
+                //         ]);
+                // }
+                // else if (parentId === "00000000-0000-0000-0000-000000000001")
+                // {
+                //     return Observable.of(
+                //         [
+                //             { parentId: "00000000-0000-0000-0000-000000000001", id: "00000000-0000-0000-0000-000000000010", title: 'AA', content: 'AA content' },
+                //             { parentId: "00000000-0000-0000-0000-000000000001", id: "00000000-0000-0000-0000-000000000011", title: 'AB', content: 'AB content' },
+                //             { parentId: "00000000-0000-0000-0000-000000000001", id: "00000000-0000-0000-0000-000000000012", title: 'AC', content: 'AC content' }
+                //         ]);
+                // }
+                // else if (parentId === "00000000-0000-0000-0000-000000000002")
+                // {
+                //     return Observable.of([]);
+                // }
             }
         }
 

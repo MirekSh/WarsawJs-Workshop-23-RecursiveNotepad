@@ -17,16 +17,15 @@ export class CqrsBus
     constructor(
         private _http: Http,
         private _storage: StorageService,
-        private _snackService: ErrorService)
+        private _errorService: ErrorService)
     {
         if (window.location.hostname.includes('localhost')) // TODO: This is primitive but works :P
         {
             this.API = 'http://localhost:3000/api/cqrsbus';
         }
-
-        this.API = 'http://r-book.herokuapp.com/api/cqrsbus';
+      
+        // this.API = 'http://r-book.herokuapp.com/api/cqrsbus'; // TEMPORARY OVERRIDE 
     }
-
 
     public async Send(message: ICommand | IQuery<any>): Promise<any>
     {
@@ -37,7 +36,6 @@ export class CqrsBus
 
         console.log('Sending message:', messageAsJson);
 
-
         const headers = new Headers(
             {
                 'Content-type': 'application/json',
@@ -47,9 +45,9 @@ export class CqrsBus
 
         try
         {
-            let response: Response = await this._http.post(this.API, messageAsJson, options)//.timeout(3000)
-                .toPromise();
-            console.log('POST Response:', response);
+            let response: Response = await this._http.post(this.API, messageAsJson, options).toPromise();
+
+          //  console.log('POST Response:', response);
 
             if (response.text() !== '')
             {
@@ -68,12 +66,12 @@ export class CqrsBus
         }
         catch (ex) // Jump here in case of non 200 respond
         {
-            console.log('[CQRS Bus] ex:', ex);
+            console.log('[CQRS Bus] exception!');//, ex);
 
             if (ex instanceof TimeoutError) // We don't get here if server is disabled
             {
                 console.log("TIMEOUT");
-                this._snackService.Error("Connection timeout");
+                this._errorService.Error("Connection timeout");
 
                 throw new ConnectionTimeoutException();
             }
@@ -81,14 +79,14 @@ export class CqrsBus
             {
                 if (ex.status === 0) // We get here if server is disabled
                 {
-                    this._snackService.Error("Server is not responding");
+                    this._errorService.Error("Server is not responding");
                 }
                 else
                 {
                     let serverException: ServerException = ex.json();
 
                     console.log('[CQRS.Send] ServerException: ', serverException);
-                    this._snackService.Error(serverException.message);
+                    this._errorService.Error(serverException.message);
 
                     throw new ServerException(serverException);
                 }
@@ -96,7 +94,7 @@ export class CqrsBus
             else 
             {
                 console.log("Unhandled exception type");
-                this._snackService.Error('Unhandled exception');
+                this._errorService.Error('Unhandled exception');
                 throw new UnhandledException();
             }
         }
